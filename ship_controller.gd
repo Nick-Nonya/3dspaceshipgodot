@@ -1,10 +1,13 @@
 extends RigidBody3D
 
+@onready var camera = $TrackballCamera
+
 var direction := Vector3.ZERO
 var input_rotation := Vector3.ZERO
 var acceleration := 10.0
 
 func _ready():
+	
 	pass
 
 
@@ -22,7 +25,17 @@ func _process(delta):
 		Input.get_axis("yaw_left", "yaw_right"),
 		Input.get_axis("roll_left", "roll_right")
 	)
-	
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		if event.button_mask == 2:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			var normalized_direction = event.relative.normalized()
+			input_rotation.x = -normalized_direction.y
+			input_rotation.y = -normalized_direction.x
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _integrate_forces(state):
 	#state.apply_force(Vector3(direction.x, 0.0, direction.y) * acceleration)
 	#state.apply_force( transform.basis * Vector3( 0.0, direction.x, direction.y ) * acceleration )
@@ -35,3 +48,5 @@ func _integrate_forces(state):
 	if Input.is_action_just_pressed("brake"):
 		state.linear_velocity = Vector3.ZERO
 		state.angular_velocity = Vector3.ZERO
+
+
