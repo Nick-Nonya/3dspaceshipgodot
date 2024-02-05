@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2dkys4rumvar"]
+
+[ext_resource type="Texture2D" uid="uid://cjntyhrvywa07" path="res://gridtile.png" id="1_g16iq"]
+[ext_resource type="PackedScene" uid="uid://8xc1aukjpixk" path="res://ship.tscn" id="1_jrpa8"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_82iof"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71gws"]
+albedo_texture = ExtResource("1_g16iq")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0irdf"]
+size = Vector2(5000, 5000)
+
+[sub_resource type="Environment" id="Environment_tg3ko"]
+background_mode = 1
+background_color = Color(0.00392157, 0.0313726, 0.0745098, 1)
+ambient_light_color = Color(0.00392157, 0.0313726, 0.0745098, 1)
+
+[node name="root" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_82iof")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_71gws")
+mesh = SubResource("PlaneMesh_0irdf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.258819, -0.933013, 0.25, 0, 0.258819, 0.965926, -0.965926, -0.25, 0.0669873, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tg3ko")
+
+[node name="RigidBody3D" parent="." instance=ExtResource("1_jrpa8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.776046, 0.630676, 0, -0.630676, 0.776046, -7.16064, 20.7269, 30.1969)
+visible = false

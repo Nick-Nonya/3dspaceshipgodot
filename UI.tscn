@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvgq85475wwpf"]
+
+[ext_resource type="Script" path="res://UI_Controller.gd" id="1_pk7g3"]
+[ext_resource type="Theme" uid="uid://bo2pei38ci55b" path="res://UITheme.tres" id="2_5aqqx"]
+
+[node name="ShipUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pk7g3")
+
+[node name="speedometer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_5aqqx")
+text = "speed"
+
+[node name="torqueometer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_5aqqx")
+text = "dasdsdsad"
+horizontal_alignment = 2
