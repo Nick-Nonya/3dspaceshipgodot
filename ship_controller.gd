@@ -29,8 +29,9 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		if event.button_mask == 2:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			var normalized_direction = event.relative.normalized()
+			
 			input_rotation.x = -normalized_direction.y
 			input_rotation.y = -normalized_direction.x
 		else:
