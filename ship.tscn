@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ship_controller.gd" id="1_1nlvn"]
 [ext_resource type="PackedScene" uid="uid://bvgq85475wwpf" path="res://UI.tscn" id="2_1pjgp"]
 [ext_resource type="ArrayMesh" uid="uid://cuf18alpieqq1" path="res://axis.obj" id="3_17qha"]
-[ext_resource type="PackedScene" uid="uid://wf72yuunvnis" path="res://thruster.tscn" id="4_fq1io"]
+[ext_resource type="PackedScene" path="res://thruster.tscn" id="4_fq1io"]
 [ext_resource type="Script" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="4_wdhrr"]
 [ext_resource type="Script" path="res://ShipTracker.gd" id="4_xs6nr"]
 
