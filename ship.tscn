@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://8xc1aukjpixk"]
+[gd_scene load_steps=10 format=3 uid="uid://8xc1aukjpixk"]
 
 [ext_resource type="Script" path="res://ship_controller.gd" id="1_1nlvn"]
 [ext_resource type="PackedScene" uid="uid://bvgq85475wwpf" path="res://UI.tscn" id="2_1pjgp"]
 [ext_resource type="ArrayMesh" uid="uid://cuf18alpieqq1" path="res://axis.obj" id="3_17qha"]
+[ext_resource type="PackedScene" uid="uid://wf72yuunvnis" path="res://thruster.tscn" id="4_fq1io"]
 [ext_resource type="Script" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="4_wdhrr"]
 [ext_resource type="Script" path="res://ShipTracker.gd" id="4_xs6nr"]
 
@@ -38,6 +39,11 @@ shape = SubResource("BoxShape3D_xvn2g")
 transform = Transform3D(1, -1.74846e-07, 7.64274e-15, 0, -4.37114e-08, -1, 1.74846e-07, 1, -4.37114e-08, -0.201866, 1, -0.347912)
 material_override = SubResource("ORMMaterial3D_csfap")
 mesh = ExtResource("3_17qha")
+
+[node name="Thruster" parent="RigidBody3D" node_paths=PackedStringArray("ship") instance=ExtResource("4_fq1io")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+ship = NodePath("..")
+activation_event = &"forward"
 
 [node name="ShipTracker" type="Node3D" parent="."]
 script = ExtResource("4_xs6nr")

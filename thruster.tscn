@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://wf72yuunvnis"]
+
+[ext_resource type="Script" path="res://thruster_controller.gd" id="1_evq1y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p16jt"]
+albedo_color = Color(0, 0.968627, 0.576471, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h7gih"]
+size = Vector3(0.5, 0.5, 0.25)
+
+[node name="Thruster" type="Node3D"]
+script = ExtResource("1_evq1y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_p16jt")
+mesh = SubResource("BoxMesh_h7gih")
