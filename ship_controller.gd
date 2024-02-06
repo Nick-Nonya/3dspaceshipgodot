@@ -1,10 +1,13 @@
 extends RigidBody3D
 
-@onready var camera = $TrackballCamera
 
 var direction := Vector3.ZERO
 var input_rotation := Vector3.ZERO
 var acceleration := 10.0
+
+var rotate_with_cursor := false
+var cursor_vector := Vector2.ZERO
+
 
 func _ready():
 	
@@ -12,6 +15,7 @@ func _ready():
 
 
 func _process(delta):
+	#print([cursor_vector, input_rotation])
 	#direction = Input.get_vector("a","d","w","s")
 	#direction.y = Input.get_axis("w","s")
 	#direction.x = Input.get_axis("d","a")
@@ -20,7 +24,16 @@ func _process(delta):
 		Input.get_axis("down","up"), 
 		Input.get_axis("forward","backward") 
 		)
-	input_rotation = Vector3(
+	
+	
+	if Input.is_action_pressed("rotate_with_cursor"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		rotate_with_cursor = true
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		rotate_with_cursor = false
+		cursor_vector = Vector2.ZERO
+		input_rotation = Vector3(
 		Input.get_axis("pitch_down", "pitch_up"),
 		Input.get_axis("yaw_left", "yaw_right"),
 		Input.get_axis("roll_left", "roll_right")
@@ -29,13 +42,14 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		if event.button_mask == 2:
-			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			var normalized_direction = event.relative.normalized()
-			
-			input_rotation.x = -normalized_direction.y
-			input_rotation.y = -normalized_direction.x
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#var normalized_direction = event.relative.normalized()
+			cursor_vector += event.relative
+			cursor_vector = cursor_vector.normalized()
+			#cursor_vector = cursor_vector.limit_length(100)
+			#input_rotation.x = -normalized_direction.y
+			#input_rotation.y = -normalized_direction.x
+			input_rotation.x = -cursor_vector.y
+			input_rotation.y = -cursor_vector.x
 
 func _integrate_forces(state):
 	#state.apply_force(Vector3(direction.x, 0.0, direction.y) * acceleration)
